@@ -1,0 +1,73 @@
+<h1 class="text-center"> Update Item</h1>
+<form (ngSubmit)="updateItem(frmModel)" #frmModel="ngForm">
+  <div class="mb-3">
+    <label for="code" class="form-label">Item Code</label>
+    <input name="code" [(ngModel)]="item.code"
+           required pattern="^I\d{4}$" disabled
+           type="text" class="form-control" id="code" placeholder="Eg:- I0001">
+  </div>
+
+  <div class="mb-3">
+    <label for="itemName" class="form-label">Item Name</label>
+    <input name="name" [(ngModel)]="item.name" #nameNgModel=ngModel
+           required pattern="^[A-Za-z ]+$"
+           type="text"
+           [class.is-invalid]="nameNgModel.touched && nameNgModel.invalid"
+           [class.is-valid]="nameNgModel.touched && nameNgModel.valid"
+           class="form-control" id="itemName" placeholder="Eg:- Rice">
+    @if (nameNgModel.hasError('required')) {
+      <small class="invalid-feedback">Item Name Can not Be Empty</small>
+    } @else {
+      <small class="invalid-feedback">Item Name is invalid</small>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="itemDescription" class="form-label">Item Description</label>
+    <input name="description" [(ngModel)]="item.description" #descNgModel=ngModel
+           required pattern="^[A-Za-z0-9 ]+$"
+           type="text"
+           [class.is-invalid]="descNgModel.touched && descNgModel.invalid"
+           [class.is-valid]="descNgModel.touched && descNgModel.valid"
+           class="form-control" id="itemDescription" placeholder="Eg:- 50kg Rice type II">
+    @if (descNgModel.hasError('required')) {
+      <small class="invalid-feedback">Item Description Can not Be Empty</small>
+    } @else {
+      <small class="invalid-feedback">Item Description is invalid</small>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="price" class="form-label">Item Price per 1kg Rs :</label>
+    <input name="price" [(ngModel)]="item.price" #priceNgModel=ngModel
+           required pattern="^[0-9]+$"
+           type="text"
+           [class.is-invalid]="priceNgModel.touched && priceNgModel.invalid"
+           [class.is-valid]="priceNgModel.touched && priceNgModel.valid"
+           class="form-control" id="price" placeholder="Eg:- 190">
+    @if (priceNgModel.hasError('required')) {
+      <small class="invalid-feedback">Item Price Can not Be Empty</small>
+    } @else {
+      <small class="invalid-feedback">Item Price is invalid</small>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="amount" class="form-label">Item amount</label>
+    <input name="amount" [(ngModel)]="item.amount" #amountNgModel=ngModel
+           required pattern="^[0-9]+$"
+           [class.is-invalid]="amountNgModel.touched && amountNgModel.invalid"
+           [class.is-valid]="amountNgModel.touched && amountNgModel.valid"
+           type="text" class="form-control" id="amount" placeholder="Eg:- 1">
+    @if (amountNgModel.hasError('required')) {
+      <small class="invalid-feedback">Item amount Can not Be Empty</small>
+    } @else {
+      <small class="invalid-feedback">Item amount is invalid</small>
+    }
+  </div>
+  <div class="d-flex justify-content-center mb-3 gap-5">
+    <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+    <button (click)="goBack()" type="Reset" class="btn btn-lg btn-warning">Cancel</button>
+  </div>
+</form>
+
